@@ -98,6 +98,26 @@ int Leaf(node * root)
 	return(l+r);
 }
 
+int MaxVal(int x, int y)
+{
+	return(x > y ? x : y);
+}
+
+int Diameter(node * root)
+{
+	if(root == NULL)
+	{
+		return(0);
+	}
+	int lsd = Diameter(root->left);
+	int rsd = Diameter(root->right);
+	
+	int lsh = Height(root->left);
+	int rsh = Height(root->right);
+	
+	return(MaxVal(lsh+rsh+3,MaxVal(lsd,rsd)));
+}
+
 node * Search(node * root, int val)
 {
 	if(root == NULL)
@@ -244,6 +264,10 @@ int main()
 		else if(ch == "leaf")
 		{
 			cout << "Leaf nodes in BST are: " << Leaf(root) << "\n";
+		}
+		else if(ch == "diameter")
+		{
+			cout << "Diameter of the BST is: " << Diameter(root) << "\n";
 		}
 		else if(ch == "search")
 		{
